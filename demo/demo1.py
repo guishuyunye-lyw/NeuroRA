@@ -79,7 +79,7 @@ plot_rdm(rdm, rescale=True)
 rdms = eegRDM(megdata, time_win=10, time_opt=1)
 
 # Plot the RDM of 0ms, 50ms, 100ms, 150ms, 200ms
-times = [0, 10, 20, 30, 40, 50]
+times = [10, 20, 30, 40, 50]
 for t in times:
     plot_rdm(rdms[t], rescale=True)
 
