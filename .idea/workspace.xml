@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6f96de87-b4a9-466e-9c57-851a40404f91" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/NeuroRA-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NeuroRA-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6f96de87-b4a9-466e-9c57-851a40404f91" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -290,18 +286,34 @@
       <workItem from="1583286574087" duration="29553000" />
       <workItem from="1588420886117" duration="2850000" />
       <workItem from="1588555483156" duration="2859000" />
-      <workItem from="1589769923251" duration="3075000" />
+      <workItem from="1589769923251" duration="3473000" />
     </task>
+    <task id="LOCAL-00001" summary="d">
+      <created>1589795207498</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589795207499</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="d" />
+    <option name="LAST_COMMIT_MESSAGE" value="d" />
   </component>
   <component name="WindowStateProjectService">
     <state x="96" y="3" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589769952921">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="96" y="3" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.689/-1920.0.1280.689@0.0.1280.689" timestamp="1589769952921" />
+    <state x="270" y="0" key="CommitChangelistDialog2" timestamp="1589795205696">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="270" y="0" key="CommitChangelistDialog2/0.0.1280.689/-1920.0.1280.689@0.0.1280.689" timestamp="1589795205696" />
     <state x="421" y="103" key="FileChooserDialogImpl" timestamp="1588557373347">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
