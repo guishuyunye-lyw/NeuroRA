@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='neurora',
-    version='1.0.5.2',
+    version='1.1.1.2',
     description=(
         'A Python Toolbox for Multimode Neural Data Representation Analysis'
     ),
@@ -35,4 +35,5 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries'
     ],
+    package_data={'neurora': ['template/*.gz']},
 )
