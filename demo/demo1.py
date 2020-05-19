@@ -12,6 +12,8 @@ from pandas import read_csv
 import mne
 from mne.io import read_raw_fif
 from mne.datasets import visual_92_categories
+
+from neurora import rsa_plot
 from neurora.nps_cal import nps
 from neurora.rdm_cal import eegRDM
 from neurora.rdm_corr import rdm_correlation_spearman
@@ -63,7 +65,10 @@ megdata = np.transpose(megdata, (1, 0, 2, 3))
 
 # shape of megdata: [n_cons, n_subs, n_chls, n_ts] -> [n_cons, n_subs, n_trials, n_chls, n_ts]
 # here data is averaged, so set n_trials = 1
+# PS：如果是你的数据，结构应该是[2,6,1,62,500]数据全部放进去。
+# n_trials就取决于你是否进行单试次的分析。一般还是会做平均吧。
 megdata = np.reshape(megdata, [92, 3, 1, 306, 1101])
+
 
 
 #%%
@@ -78,13 +83,14 @@ megdata_humanface = megdata[12:24]
 # get data under "nonhumanface" condition
 megdata_nonhumanface = megdata[36:48]
 
-# Average the data
+# Average the data（减少了一个维度）
 avg_megdata_humanface = np.average(megdata_humanface, axis=0)
 avg_megdata_nonhumanface = np.average(megdata_nonhumanface, axis=0)
 
 # Create NPS input data
 # Here we extract the data from first 5 channels between 0ms and 1000ms
-nps_data = np.zeros([2, 3, 1, 5, 1000]) # n_cons=2, n_subs=3, n_chls=5, n_ts=1000
+nps_data = np.zeros([2, 3, 1, 5, 1000]) # n_cons=2, n_subs=3, n_chls=5, n_ts=1000  PS:为何是5channel
+#这里是去掉了[-100,0]的数据
 nps_data[0] = avg_megdata_humanface[:, :, :5, 100:1100] # the start time of the data is -100ms
 nps_data[1] = avg_megdata_nonhumanface[:, :, :5, 100:1100] # so 100:1200 corresponds 0ms-1000ms
 
@@ -99,7 +105,7 @@ plot_nps_hotmap(nps[:, :, 0], time_unit=[0, 0.01], abs=True)
 plot_nps_hotmap(nps[:, :, 0], time_unit=[0, 0.01], abs=True, smooth=True)
 
 
-
+#%%
 """**********       Section 4: Calculating single RDM and Plotting        **********"""
 
 # Calculate the RDM based on the data during 190ms-210ms
@@ -109,7 +115,7 @@ rdm = eegRDM(megdata[:, :, :, :, 290:310])
 plot_rdm(rdm, rescale=True)
 
 
-
+#%%
 """**********       Section 5: Calculating RDMs and Plotting       **********"""
 
 # Calculate the RDMs by a 10ms time-window
@@ -122,7 +128,7 @@ for t in times:
     plot_rdm(rdms[t], rescale=True)
 
 
-
+#%% 对比两个rdm之间的相似性，只有一个值出来（想到MVPA的那个图）
 """**********       Section 6: Calculating the Similarity between two RDMs     **********"""
 
 # RDM of 200ms
@@ -131,14 +137,17 @@ rdm_sample1 = rdms[30]
 rdm_sample2 = rdms[90]
 
 # calculate the correlation coefficient between these two RDMs
+# r p值都有
 corr = rdm_correlation_spearman(rdm_sample1, rdm_sample2, rescale=True)
 print(corr)
 
 
-
+#%%
 """**********       Section 7: Calculating the Similarity and Plotting        **********"""
 
 # Calculate the representational similarity between 200ms and all the time points
+# 这个思路就清晰了！自己设计的rdm和真实情况的rdm进行对比
+# 到时候你算的时候就……也是先算好rdms，然后再用一个去对比
 corrs1 = rdms_corr(rdm_sample1, rdms)
 
 # Plot the corrs1
@@ -154,13 +163,14 @@ labels = ["by 200ms's data", "by 800ms's data"]
 plot_corrs_by_time(corrs, labels=labels, time_unit=[-0.1, 0.01])
 
 
-
+#%%
 """**********       Section 8: Calculating the RDMs for each channels        **********"""
-
+# section 7 就相当于是单个channel的！！所以用线表示就足够了，但是多个channel，就要用热图了。hotmap
 # Calculate the RDMs for the first six channels by a 10ms time-window between 0ms and 1000ms
 rdms_chls = eegRDM(megdata[:, :, :, :6, 100:1100], chl_opt=1, time_opt=1, time_win=10, time_step=10)
 
 # Create a 'human-related' coding model RDM
+# 这个是人为自己设定的rdm这是你之后要做的事情。
 model_rdm = np.ones([92, 92])
 for i in range(92):
     for j in range(92):
@@ -180,3 +190,4 @@ plot_corrs_hotmap(corrs_chls, time_unit=[0, 0.01])
 # Set more parameters and re-plot
 plot_corrs_hotmap(corrs_chls, time_unit=[0, 0.01], lim=[-0.15, 0.15], smooth=True, cmap='bwr')
 
+rsa_plot.plot_stats_hotmap

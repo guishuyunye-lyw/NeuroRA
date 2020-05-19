@@ -40,17 +40,17 @@ def nps(data, time_win=5, time_step=5, sub_opt=0):
     nps : array
         The EEG-like NPS.
         If sub_opt=0, the shape of NPS is [n_chls, int((n_ts-time_win)/time_step)+1, 2].
-        If sub_opt=1, the shape of NPS is [n_subs, n_chls, int((n_ts-time_win)/time_step)+1, 2].
+        If sub_opt=1, the shape of NPS is [n_subs, n_chls, int((n_ts-time_win)/time_step)+1, 2].  #多一个维度n_subs.
         2 representation a r-value and a p-value.
     """
 
     # get the number of subjects, trials, channels & time-points
     nsubs, ntrials, nchls, nts = data.shape[1:]
 
-    # the time-points for calculating NPS
+    # the time-points for calculating NPS  LYW:这里就是10time points作为一个win，step也是10，这样子就没有重复。你的设置因该是win=50，step=1
     ts = int((nts - time_win) / time_step) + 1
 
-    # sub_opt=1
+    # sub_opt=1  PS:你的方案一可以选0，方案二估计是选1，因为你想要每个每个被试都
     if sub_opt == 1:
 
         # initialize the NPS
