@@ -5,6 +5,7 @@
 
 __author__ = 'Zitong Lu'
 
+import nibabel as nibabel
 import numpy as np
 import os.path as op
 from pandas import read_csv
@@ -16,7 +17,7 @@ from neurora.rdm_cal import eegRDM
 from neurora.rdm_corr import rdm_correlation_spearman
 from neurora.corr_cal_by_rdm import rdms_corr
 from neurora.rsa_plot import plot_rdm, plot_corrs_by_time, plot_nps_hotmap, plot_corrs_hotmap
-
+#%%
 
 """**********       Section 1: loading example data        **********"""
 """ Here, we use MNE-Python toolbox for loading data and processing """
@@ -65,7 +66,7 @@ megdata = np.transpose(megdata, (1, 0, 2, 3))
 megdata = np.reshape(megdata, [92, 3, 1, 306, 1101])
 
 
-
+#%%
 """**********       Section 3: Calculating the neural pattern similarity        **********"""
 
 # Get data under different condition
