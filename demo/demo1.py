@@ -99,10 +99,13 @@ nps_data[1] = avg_megdata_nonhumanface[:, :, :5, 100:1100] # so 100:1200 corresp
 nps = nps(nps_data, time_win=10, time_step=10)
 
 # Plot the NPS results
-plot_nps_hotmap(nps[:, :, 0], time_unit=[0, 0.01], abs=True)
+plot_nps_hotmap(nps[:, :, 0], time_unit=[0, 0.01])
 
 # Smooth the results and plot
-plot_nps_hotmap(nps[:, :, 0], time_unit=[0, 0.01], abs=True, smooth=True)
+plot_nps_hotmap(nps[:, :, 0], time_unit=[0, 0.01],  smooth=True)
+
+# 加上轮廓
+rsa_plot.plot_stats_hotmap(nps,time_unit=[0, 0.01], smooth=True,outline=True)
 
 
 #%%
